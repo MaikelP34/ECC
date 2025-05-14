@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "componenten.h"
+#include "components.h"
 #include "node.h"
 
 int main() {

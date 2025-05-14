@@ -2,6 +2,8 @@
     "files.associations": {
         "string.h": "c",
         "stdlib.h": "c",
-        "componenten.h": "c"
+        "componenten.h": "c",
+        "node.h": "c",
+        "components.h": "c"
     }
 }
