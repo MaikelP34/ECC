@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include "components.h"
-#include "node.h" // Make sure this header defines struct Node
 
 //=====================================================================================================================================================================
 
@@ -75,6 +74,14 @@ struct CurrentSource* createCurrentSource (float current, float frequency, struc
     return currentSource;
 }
 
+struct Node* createNode (int nodeNumber, float currentSum) {
+    struct Node *node = (struct Node *)malloc(sizeof(struct Node));
+    if (node == NULL) return NULL;
+    node->nodeNumber = nodeNumber;
+    node->currentSum = currentSum;
+    return node;
+}
+
 //=====================================================================================================================================================================
 
 void deleteResistor (struct Resistor *resistor) {
@@ -116,6 +123,116 @@ void deleteCurrentSource (struct CurrentSource *currentSource) {
 void deleteNode (struct Node *node) {
     if (node != NULL) {
         free(node);
+    }
+}
+
+//=====================================================================================================================================================================
+
+void updateResistor (struct Resistor *resistor, float newResistance, struct Node *newNodeA, struct Node *newNodeB, char newVoltagePolarity) {
+    if (resistor != NULL) {
+        if (newResistance > 0) {
+            resistor->resistance = newResistance;
+        }
+        if (newNodeA != NULL) {
+            resistor->nodeA = newNodeA;
+        }
+        if (newNodeB != NULL) {
+            resistor->nodeB = newNodeB;
+        }
+        if (newVoltagePolarity == '+' || newVoltagePolarity == '-') {
+            resistor->voltagePolarity = newVoltagePolarity;
+        }
+    }
+}
+
+void updateCapacitor (struct Capacitor *capacitor, float newCapacitance, struct Node *newNodeA, struct Node *newNodeB, char newVoltagePolarity) {
+    if (capacitor != NULL) {
+        if (newCapacitance > 0) {
+            capacitor->capacitance = newCapacitance;
+        }
+        if (newNodeA != NULL) {
+            capacitor->nodeA = newNodeA;
+        }
+        if (newNodeB != NULL) {
+            capacitor->nodeB = newNodeB;
+        }
+        if (newVoltagePolarity == '+' || newVoltagePolarity == '-') {
+            capacitor->voltagePolarity = newVoltagePolarity;
+        }
+    }
+}
+
+void updateInductor (struct Inductor *inductor, float newInductance, struct Node *newNodeA, struct Node *newNodeB, char newVoltagePolarity) {
+    if (inductor != NULL) {
+        if (newInductance > 0) {
+            inductor->inductance = newInductance;
+        }
+        if (newNodeA != NULL) {
+            inductor->nodeA = newNodeA;
+        }
+        if (newNodeB != NULL) {
+            inductor->nodeB = newNodeB;
+        }
+        if (newVoltagePolarity == '+' || newVoltagePolarity == '-') {
+            inductor->voltagePolarity = newVoltagePolarity;
+        }
+    }
+}
+
+void updateDiode (struct Diode *diode, float newForwardVoltage, struct Node *newNodeA, struct Node *newNodeB, char newVoltagePolarity) {
+    if (diode != NULL) {
+        if (newForwardVoltage > 0) {
+            diode->forwardvoltage = newForwardVoltage;
+        }
+        if (newNodeA != NULL) {
+            diode->nodeA = newNodeA;
+        }
+        if (newNodeB != NULL) {
+            diode->nodeB = newNodeB;
+        }
+        if (newVoltagePolarity == '+' || newVoltagePolarity == '-') {
+            diode->voltagePolarity = newVoltagePolarity;
+        }
+    }
+}
+
+void updatevoltageSource (struct voltageSource *voltageSource, float newVoltage, float newFrequency, struct Node *newNodeA, struct Node *newNodeB, char newVoltagePolarity) {
+    if (voltageSource != NULL) {
+        if (newVoltage > 0) {
+            voltageSource->voltage = newVoltage;
+        }
+        if (newFrequency > 0) {
+            voltageSource->frequency = newFrequency;
+        }
+        if (newNodeA != NULL) {
+            voltageSource->nodeA = newNodeA;
+        }
+        if (newNodeB != NULL) {
+            voltageSource->nodeB = newNodeB;
+        }
+        if (newVoltagePolarity == '+' || newVoltagePolarity == '-') {
+            voltageSource->voltagePolarity = newVoltagePolarity;
+        }
+    }
+}
+
+void updateCurrentSource (struct CurrentSource *currentSource, float newCurrent, float newFrequency, struct Node *newNodeA, struct Node *newNodeB, char newCurrentDirection) {
+    if (currentSource != NULL) {
+        if (newCurrent > 0) {
+            currentSource->current = newCurrent;
+        }
+        if (newFrequency > 0) {
+            currentSource->frequency = newFrequency;
+        }
+        if (newNodeA != NULL) {
+            currentSource->nodeA = newNodeA;
+        }
+        if (newNodeB != NULL) {
+            currentSource->nodeB = newNodeB;
+        }
+        if (newCurrentDirection == '+' || newCurrentDirection == '-') {
+            currentSource->currentDirection = newCurrentDirection;
+        }
     }
 }
 
